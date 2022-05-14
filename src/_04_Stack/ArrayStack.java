@@ -2,11 +2,11 @@ package _04_Stack;
 
 import java.util.EmptyStackException;
 
-public class Stack {
+public class ArrayStack {
 	private int[] stackArray; //정수 원소를 저장할 배열
 	private int top; //꼭데기 원소의 위치 변수
 	
-	public Stack(int capacity) {
+	public ArrayStack(int capacity) {
 		stackArray=new int[capacity];
 		top=-1;
 	}
