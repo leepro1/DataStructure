@@ -2,6 +2,7 @@ package _03_DoublyLinkedList;
 
 public class DoublyLinkedList {
 		private Node head;
+		private Node tail;
 		private int size;
 		
 		private class Node{
@@ -12,6 +13,7 @@ public class DoublyLinkedList {
 		
 		public DoublyLinkedList() {
 			head=null;
+			tail=null;
 			size=0;
 		}
 
@@ -20,23 +22,33 @@ public class DoublyLinkedList {
 			return true;
 		}
 		
+		public void addFirst(Object value) {
+			Node newNode = new Node();
+			newNode.data=value;
+			newNode.rlink=head;
+			
+			head=newNode;
+			size++;
+			
+			if(tail==null) {
+				tail=head;
+			}
+		}
+		
 		public void addLast(Object value) {
 			Node newNode = new Node();
 			newNode.data=value;
-			newNode.rlink=null;
 			
 			if(head==null) {
-				//addFirst(value);
+				addFirst(value);
+				return;
 			}
 			else{
-				Node temp=head;
+				tail.rlink=newNode;
+				newNode.llink=tail;
 				
-				while(temp.rlink!=null){
-					temp=temp.rlink;
-				}
-				
-				temp.rlink=newNode;
+				tail=newNode;
 				size++;
-				}
+			}
 		}
 }
