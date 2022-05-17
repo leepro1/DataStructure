@@ -74,6 +74,7 @@ public class SinglyLinkedList {
 		newNode.data=value;
 		newNode.link=preNode.link;
 		preNode.link=newNode;
+		size++;
 	}
 	
 	public void set(int index, Object value) {
