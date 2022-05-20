@@ -93,6 +93,10 @@ public class SinglyLinkedList {
 	}
 	
 	public Object get(int index) {
+		if(index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
+		
 		Node temp=head;
 		
 		for(int i=0;i<index;i++){
@@ -140,59 +144,64 @@ public class SinglyLinkedList {
 	      }
 	   }
 		
-		public boolean remove(Object value) {
-		      Node preNode=head;
-		      Node oldNode=head;
-		      
-		      for(int i=0;i<size;i++) {
-		    	  if(oldNode.data.equals(value))
-		    		  break;
-		    	  preNode=preNode.link;
-		      }
-		      
-		      if(preNode==null)
-		    	  return false;
-		      
-		      else {
-		    	  preNode.link=oldNode.link;
-		    	  oldNode.data=null;
-		    	  oldNode.link=null;
-		    	  size--;
-		    	  return true;
-		      }
-		   }
-
-		public int indexOf(Object value) {
-			Node temp=head;
+	public boolean remove(Object value) {
+	      Node preNode=head;
+	      Node oldNode=head;
+	      
+	      for(;oldNode!=null;oldNode=oldNode.link) {
+	    	  if(oldNode.data.equals(value))
+	    		  break;
+	    	  preNode=oldNode;
+	      }
+	      
+	      if(preNode==null)
+	    	  return false;
+	      
+	      if(oldNode.equals(head)) {
+	    	  remove();
+	    	  return true;
+	      }
+	      
+	      else {
+	    	  preNode.link=oldNode.link;
+	    	  oldNode.data=null;
+	    	  oldNode.link=null;
+	    	  size--;
+	    	  return true;
+	      }
+	}
+	
+	public int indexOf(Object value) {
+		Node temp=head;
 			
-			for(int i=0; i<size; i++) {
-				if(value.equals(temp.data))
-					return i;
-				temp=temp.link;
-			}
-			return -1;
+		for(int i=0; i<size; i++) {
+			if(value.equals(temp.data))
+				return i;
+			temp=temp.link;
 		}
+		return -1;
+	}
 		
-		public int size() {
-			return size;
-		}
+	public int size() {
+		return size;
+	}
 	
-		public boolean isEmpty() {
-			return size == 0;
-		}
+	public boolean isEmpty() {
+		return size == 0;
+	}
 	
-		public boolean contains(Object value) {
-			return indexOf(value) >= 0;
-		}
+	public boolean contains(Object value) {
+		return indexOf(value) >= 0;
+	}
 		
-		public void clear() {
-			for (Node temp = head; temp!= null;) {
-				Node nextNode = temp.link;
-				temp.data = null;
-				temp.link = null;
-				temp= nextNode;
-			}
-			head = null;
-			size = 0;
+	public void clear() {
+		for (Node temp = head; temp!= null;) {
+			Node nextNode = temp.link;
+			temp.data = null;
+			temp.link = null;
+			temp= nextNode;
 		}
+		head = null;
+		size = 0;
+	}
 }
