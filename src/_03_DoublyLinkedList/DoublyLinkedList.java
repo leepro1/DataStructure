@@ -178,8 +178,10 @@ public class DoublyLinkedList {
 				if(value.equals(temp.data))
 					return i;
 					
-				if(temp.rlink!=null)
-					temp=temp.rlink;
+				if(temp.rlink==null)
+					break;
+				
+				temp=temp.rlink;
 			}
 			return -1;
 		}

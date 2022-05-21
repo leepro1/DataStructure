@@ -177,6 +177,10 @@ public class SinglyLinkedList {
 		for(int i=0; i<size; i++) {
 			if(value.equals(temp.data))
 				return i;
+			
+			if(temp.link==null)
+				break;
+			
 			temp=temp.link;
 		}
 		return -1;
