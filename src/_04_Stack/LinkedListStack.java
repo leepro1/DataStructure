@@ -3,35 +3,73 @@ package _04_Stack;
 import java.util.EmptyStackException;
 
 public class LinkedListStack {
-private Node top; //꼭데기 노드를 가리킬 변수
+	private Node top;
+	private int size;
 	
-	private class Node{ //연결리스트 노드 구조를 나타내는 클래스
-		int data;
+	private class Node{
+		Object data;
 		Node link;
 	}
 	
 	public LinkedListStack() {
 		top=null;
+		size=0;
 	}
 	
-	public boolean isEmpty() { //스택이 비었는지 검사
+	public boolean empty() {
 		return top==null;
 	}
 	
-	public void push(int item) { //스택 top에 원소 삽입
+	public Object push(Object item) {
 		Node newNode = new Node();
 		newNode.data=item;
 		newNode.link=top;
 		top=newNode;
+		size++;
+		
+		return item;
 	}
 	
-	public int pop() { //스택 top에서 원소를 삭제하여 리턴
-		if(isEmpty())
+	public Object peek() {
+		if(empty())
+			throw new EmptyStackException();
+		return top.data;
+	}
+	
+	public Object pop() {
+		if(empty())
 			throw new EmptyStackException();
 		else {
-			int item=top.data;
+			Object item=top.data;
 			top=top.link;
+			size--;
 			return item;
 		}
 	}
+	
+	public int size() {
+		return size;
+	}
+	
+	public int search(Object item) {
+		int index=0;
+		for(Node temp=top;temp!=null;temp=temp.link) {
+			if(temp.data==item)
+				return index;
+			index++;
+		}
+		return -1;
+	}
+	
+	public void clear() {
+		while(true) {
+			top=top.link;
+			if(top==null){
+				top=null;
+				break;
+			}
+		}
+		size=0;
+	}
+	
 }
