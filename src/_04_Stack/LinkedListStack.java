@@ -54,7 +54,7 @@ public class LinkedListStack {
 	public int search(Object item) {
 		int index=0;
 		for(Node temp=top;temp!=null;temp=temp.link) {
-			if(temp.data==item)
+			if(temp.data.equals(item))
 				return index;
 			index++;
 		}

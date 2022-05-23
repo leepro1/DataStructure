@@ -50,7 +50,7 @@ public class ArrayStack {
 	public int search(Object item) {
 		for(int temp=top;temp>=0;temp--) {
 			if(stackArray[temp].equals(item))
-				return top - temp + 1;
+				return top - temp;
 		}
 		return -1;
 	}
