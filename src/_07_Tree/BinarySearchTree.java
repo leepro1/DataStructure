@@ -1,5 +1,7 @@
 package _07_Tree;
 
+import java.util.NoSuchElementException;
+
 public class BinarySearchTree {
 	private Node root = null; 
 	
@@ -20,6 +22,28 @@ public class BinarySearchTree {
 				return true;
 		}
 		return false;
+	}
+	
+	public int first() {
+		if(root==null) {
+			throw new NoSuchElementException();
+		}
+		Node p=root;
+		while(p.leftChild!=null) {
+			p=p.leftChild;
+		}
+		return p.key;	
+	}
+	
+	public int last() {
+		if(root==null){
+			throw new NoSuchElementException();
+		}
+		Node p=root;
+		while(p.rightChild!=null) {
+			p=p.rightChild;
+		}
+		return p.key;
 	}
 	
 	public void add(int key) {
