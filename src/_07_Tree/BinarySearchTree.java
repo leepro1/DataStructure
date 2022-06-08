@@ -47,43 +47,59 @@ public class BinarySearchTree {
 	}
 	
 	public void add(int key) {
-		root=insertKey(root, key);
+		root=insert(root, key);
 	}
 	
-	private Node insertKey(Node p, int key) {
+	private Node insert(Node p, int key) {
 		if(p==null) {
 			Node newNode=new Node();
 			newNode.key=key;
 			return newNode;
 		}
 		else if(key<p.key) {
-			p.leftChild=insertKey(p.leftChild, key);
+			p.leftChild=insert(p.leftChild, key);
 			return p;
 		}
 		else if(key>p.key) {
-			p.rightChild=insertKey(p.rightChild, key);
+			p.rightChild=insert(p.rightChild, key);
 			return p;
 		}
 		else
 			return p;
 	}
 	
-	@Override
-	public String toString() {
-		StringBuffer result = new StringBuffer("(");
-		inorder(root,result);
-		if(result.length()>2) {
-			result.replace(result.length()-2,result.length(),"");
-		}
-		result.append(")");
-		return result.toString(); //StringBuffer인 result를 String으로 바꾸기 위함
+	public void preorder() {
+		preorder(root);
 	}
 	
-	private void inorder(Node p, StringBuffer result) {
+	private void preorder(Node p) {
 		if(p!=null) {
-			inorder(p.leftChild, result);
-			result.append(p.key+", ");
-			inorder(p.rightChild, result);
+			System.out.println(p.key);
+			preorder(p.leftChild);
+			preorder(p.rightChild);
+		}
+	}
+	
+	public void inorder() {
+		inorder(root);
+	}
+	
+	private void inorder(Node p) {
+		if(p!=null) {
+			inorder(p.leftChild);
+			System.out.println(p.key);
+			inorder(p.rightChild);
+		}
+	}
+	public void postorder() {
+		postorder(root);
+	}
+	
+	private void postorder(Node p) {
+		if(p!=null) {
+			postorder(p.leftChild);
+			postorder(p.rightChild);
+			System.out.println(p.key);
 		}
 	}
 }
