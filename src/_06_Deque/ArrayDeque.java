@@ -38,4 +38,26 @@ public class ArrayDeque {
 		
 		return true;
 	}
+	
+	public boolean isEmpty() {
+		return rear==front;
+	}
+	
+	public boolean isFull() {
+		return (rear+1)%array.length==front;
+	}
+	
+	public int size() {
+		return size;
+	}
+	
+	public void clear() {
+		for(int i=0;i<array.length;i++) {
+			array[i]=null;
+		}
+			
+		size = 0;
+		front = 0;
+		rear = 0;
+	}
 }
