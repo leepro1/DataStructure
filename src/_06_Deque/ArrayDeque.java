@@ -83,6 +83,76 @@ public class ArrayDeque {
 		return array[(rear)];
 	}
 	
+	public Object poll() {		
+		return pollFirst();
+	}
+	
+	public Object pollFirst() {
+		if(isEmpty()) {
+			return null;
+		}		
+		int oldCapacity = array.length;
+		front = (front + 1) % oldCapacity;
+
+		Object item = array[front];
+		
+		array[front] = null;
+		size--;
+		
+		return item;
+	}	
+	
+	public Object pollLast() {
+		if(isEmpty()) {
+			return null;
+		}
+		
+		Object item = array[rear]; 
+		
+		array[rear] = null;	
+		int oldCapacity = array.length;
+
+		rear = (rear - 1 + oldCapacity) % oldCapacity;
+		size--;
+		
+		return item;
+	}
+	
+	public Object remove() {
+		return removeFirst();
+	}
+	
+	public Object removeFirst() {
+		if(isEmpty()) {
+			throw new NoSuchElementException();
+		}
+		int oldCapacity = array.length;
+		front = (front + 1) % oldCapacity;
+
+		Object item = array[front];
+		
+		array[front] = null;
+		size--;
+		
+		return item;
+	}
+	
+	public Object removeLast() {
+		if(isEmpty()) {
+			throw new NoSuchElementException();
+		}
+		
+		Object item = array[rear]; 
+		
+		array[rear] = null;	
+		int oldCapacity = array.length;
+
+		rear = (rear - 1 + oldCapacity) % oldCapacity;
+		size--;
+		
+		return item;
+	}
+	
 	public boolean isEmpty() {
 		return rear==front;
 	}
