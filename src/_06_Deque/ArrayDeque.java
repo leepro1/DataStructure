@@ -153,6 +153,16 @@ public class ArrayDeque {
 		return item;
 	}
 	
+	public boolean contains(Object value) {
+		int temp=(front+1)%array.length;
+		
+		for(int i=0;i<size;i++,temp=(temp+1)%array.length) {
+			if(array[temp].equals(value))
+				return true;
+		}
+		return false;
+	}
+	
 	public boolean isEmpty() {
 		return rear==front;
 	}

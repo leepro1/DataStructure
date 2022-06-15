@@ -115,7 +115,7 @@ public class LinkedListDeque {
 	}
 	
 	public boolean isEmpty() {
-		return 
+		return head==null;
 	}
 	
 	public int size() {
@@ -123,6 +123,20 @@ public class LinkedListDeque {
 	}
 	
 	public void clear() {
+		for (Node tempNode=head; tempNode!=null;) {
+			Node nextNode = tempNode.rlink;
+			tempNode.data = null;
+			tempNode.rlink = null;
+			tempNode.llink = null;
+			tempNode = nextNode;
+		}
 		
+		size = 0;
+		head = null;
+		tail = null;
+	}
+	
+	public boolean contains(Object value) {
+		return false;
 	}
 }
