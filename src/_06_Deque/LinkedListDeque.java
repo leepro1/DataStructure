@@ -24,11 +24,29 @@ public class LinkedListDeque {
 	}
 	
 	public boolean offerLast(Object item) {
+		if(isEmpty())
+			return offerFirst(item);
+		
+		Node newNode=new Node();
+		newNode.data=item;
+		newNode.llink=tail;
+		tail.rlink=newNode;
+		tail=newNode;
+		size++;
 		
 		return true;
 	}
 	
 	public boolean offerFirst(Object item) {
+		Node newNode=new Node();
+		newNode.data=item;
+		newNode.rlink=head;
+		
+		if(head!=null)
+			head.llink=newNode;
+		
+		head=newNode;
+		size++;
 		
 		return true;
 	}
