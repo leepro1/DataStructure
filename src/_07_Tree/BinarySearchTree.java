@@ -67,6 +67,82 @@ public class BinarySearchTree {
 		else
 			return p;
 	}
+	public boolean remove(int element) {
+        Node removeNode = root;
+        Node parentOfRemoveNode = null;
+
+        while (removeNode.key != element) {
+            parentOfRemoveNode = removeNode;
+
+            if (removeNode.key > element) {
+                removeNode = removeNode.leftChild;
+            } else {
+                removeNode = removeNode.rightChild;
+            }
+
+            if (removeNode == null)
+                return false;
+
+        }
+
+        if (removeNode.leftChild == null && removeNode.rightChild == null) {
+            if (removeNode == root) {
+            	root = null;
+            } else if (removeNode == parentOfRemoveNode.rightChild) {
+                parentOfRemoveNode.rightChild = null;
+            } else {
+                parentOfRemoveNode.leftChild = null;
+            }
+        }
+
+        else if (removeNode.leftChild == null) {
+            if (removeNode == root) {
+                root = removeNode.rightChild;
+            } else if (removeNode == parentOfRemoveNode.rightChild) {
+                parentOfRemoveNode.rightChild = removeNode.rightChild;
+            } else {
+                parentOfRemoveNode.leftChild = removeNode.rightChild;
+            }
+        }
+
+        else if (removeNode.rightChild == null) {
+            if (removeNode == root) {
+                root= removeNode.leftChild;
+            } else if (removeNode == parentOfRemoveNode.rightChild) {
+                parentOfRemoveNode.rightChild = removeNode.leftChild;
+            } else {
+                parentOfRemoveNode.leftChild = removeNode.leftChild;
+            }
+        }
+
+        else {
+            Node parentOfReplaceNode = removeNode;
+
+            Node replaceNode = parentOfReplaceNode.rightChild;
+
+            while (replaceNode.leftChild != null) {
+                parentOfReplaceNode = replaceNode;
+                replaceNode = replaceNode.leftChild;
+            }
+
+            if (replaceNode != removeNode.rightChild) {
+                parentOfReplaceNode.leftChild = replaceNode.rightChild;
+                replaceNode.rightChild = removeNode.rightChild;
+            }
+
+            if (removeNode == root) {
+                root = replaceNode;
+            } else if (removeNode == parentOfRemoveNode.rightChild) {
+                parentOfRemoveNode.rightChild = replaceNode;
+            } else {
+                parentOfRemoveNode.leftChild = replaceNode;
+            }
+
+            replaceNode.leftChild = removeNode.leftChild;
+        }
+
+        return true;
+    }
 	
 	public void preorder() {
 		preorder(root);
