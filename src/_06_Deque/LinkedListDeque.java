@@ -19,6 +19,20 @@ public class LinkedListDeque {
 		tail=null;
 	}
 	
+	public boolean add(Object item) {
+		Node newNode=new Node();
+		newNode.data=item;
+		newNode.rlink=head;
+		
+		if(head!=null)
+			head.llink=newNode;
+		
+		head=newNode;
+		size++;
+		
+		return true;
+	}
+	
 	public boolean offer(Object item) {
 		return offerLast(item);
 	}
@@ -59,15 +73,14 @@ public class LinkedListDeque {
 		if(isEmpty()) {
 			return null;
 		}
-		return 
+		return head.data; 
 	}
 	
 	public Object peekLast() {
 		if(isEmpty()) {
 			return null;
 		}
-		
-		return 
+		return tail.data; 
 	}
 	
 	public Object element() {
@@ -78,14 +91,14 @@ public class LinkedListDeque {
 		if(isEmpty()) {
 			throw new NoSuchElementException();
 		}
-		return
+		return head.data;
 	}
 	
 	public Object getLast() {
 		if(isEmpty()) {
 			throw new NoSuchElementException();
 		}
-		return 
+		return tail.data;
 	}
 	
 	public Object poll() {		
@@ -96,19 +109,30 @@ public class LinkedListDeque {
 		if(isEmpty()) {
 			return null;
 		}		
+		Object item=head.data;
+		Node newNode=head.rlink;
+		head.data=null;
+		head.llink=null;
+		head.rlink=null;
+		head=newNode;
+		size--;
 		
-		
-		return 
-	}	
+		return item; 
+	}
 	
 	public Object pollLast() {
 		if(isEmpty()) {
 			return null;
 		}
+		Object item=head.data;
+		Node newNode=head.rlink;
+		head.data=null;
+		head.llink=null;
+		head.rlink=null;
+		head=newNode;
+		size--;
 		
-		
-		
-		return
+		return item; 
 	}
 	
 	public Object remove() {
@@ -119,17 +143,30 @@ public class LinkedListDeque {
 		if(isEmpty()) {
 			throw new NoSuchElementException();
 		}
+		Object item=head.data;
+		Node newNode=head.rlink;
+		head.data=null;
+		head.llink=null;
+		head.rlink=null;
+		head=newNode;
+		size--;
 		
-		return 
+		return item; 
 	}
 	
 	public Object removeLast() {
 		if(isEmpty()) {
 			throw new NoSuchElementException();
 		}
+		Object item=tail.data;
+		Node newNode=tail.llink;
+		tail.data=null;
+		tail.llink=null;
+		tail.rlink=null;
+		tail=newNode;
+		size--;
 		
-		
-		return 
+		return item; 
 	}
 	
 	public boolean isEmpty() {
@@ -155,6 +192,10 @@ public class LinkedListDeque {
 	}
 	
 	public boolean contains(Object value) {
+		for (Node tempNode=head; tempNode!=null;tempNode=tempNode.rlink) {
+			if(tempNode.data.equals(value))
+				return true;
+		}
 		return false;
 	}
 }
